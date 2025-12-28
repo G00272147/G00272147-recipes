@@ -4,9 +4,12 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+
+//Ionicons setup, registering icons used in the app
 import { addIcons } from 'ionicons';
 import { heart, settings, home } from 'ionicons/icons';
 
+//Register icons
 addIcons({ heart, settings, home });
 
 bootstrapApplication(AppComponent, {
