@@ -46,7 +46,7 @@
   ></ion-img>
 
   <ion-card-content>
-    <div>{{ ing.original }}</div>
+    <div>{{ ing.originalClean || ing.name }}</div>
     <ion-text color="medium">{{ measureText(ing) }}</ion-text>
   </ion-card-content>
 </ion-card>
