@@ -1,7 +1,9 @@
+<!-- Home Page header showing student number and navigation buttons -->
 <ion-header>
   <ion-toolbar>
     <ion-title>G00272147</ion-title>
 
+    <!--Navigation buttons to Favourites and Settings pages -->
     <ion-buttons slot="end">
       <!-- TEMP: text shows even if icons fail -->
       <ion-button routerLink="/favourite" fill="clear">
@@ -9,6 +11,7 @@
         Favourites
       </ion-button>
 
+      <!-- Button to open Settings page -->
       <ion-button routerLink="/settings" fill="clear">
         <ion-icon slot="start" name="settings"></ion-icon>
         Settings
@@ -20,19 +23,25 @@
 
 
 <ion-content class="ion-padding">
+  <!-- Input field for ingredients -->
   <ion-item>
     <ion-label position="stacked">Enter Ingredients</ion-label>
     <ion-input [(ngModel)]="ingredients" placeholder="carrots,beef,potatoes"></ion-input>
   </ion-item>
 
+  <!-- Search button, calls search method in home.page.ts -->
 <ion-button expand="block" (click)="search()">SEARCH</ion-button>
 
+<!-- Show spinner while loading -->
 <ion-spinner *ngIf="loading"></ion-spinner>
 
+<!-- Show results as cards with images from spoonacular -->
 <ion-card *ngFor="let r of results">
   <img [src]="r.image" />
   <ion-card-content>
+    <!-- Recipe title -->
     <ion-card-title>{{ r.title }}</ion-card-title>
+    <!-- Button to view recipe details -->
       <ion-button size="small" (click)="goToDetails(r.id)">DETAILS</ion-button>
     </ion-card-content>
   </ion-card>

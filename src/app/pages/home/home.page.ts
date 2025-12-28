@@ -12,16 +12,19 @@ import { SpoonacularService } from '../../services/spoonacular';
   styleUrls: ['home.page.scss'],
   imports: [IonicModule, CommonModule, FormsModule, RouterModule],
 })
-export class HomePage {
-  studentNumber = 'G00272147';
-  ingredients = '';
-  results: any[] = [];
+
+//Let users search recipes by ingredients and view results
+export class HomePage { 
+  studentNumber = 'G00272147'; // Student number shown in header
+  ingredients = ''; //enter text in ingredients input field
+  results: any[] = []; //results returned from spoonacular API
   loading = false;
 
   constructor(private api: SpoonacularService, private router: Router) {}
 
-  errorMsg = '';
+  errorMsg = ''; //error message to display if search fails
 
+  //Call SpoonacularService to search recipes by ingredients
   search() {
     const query = this.ingredients.trim();
     if (!query) {
@@ -46,6 +49,7 @@ export class HomePage {
     });
 }
 
+//Navigate to recipe details page
 goToDetails(id: number) {
   this.router.navigate(['/recipe-details', id]);
 }
