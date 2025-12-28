@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Favourite Recipes</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home" fill="clear" aria-label="Home">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+
+            <ion-button routerLink="/settings" fill="clear" aria-label="Settings">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let r of favs">
+    <img [src]="r.image" />
+    <ion-card-content>
+      <ion-card-title> {{ r.title }}</ion-card-title>
+      <ion-button size="small" [routerLink]="['/recipe-details', r.id]">DETAILS</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+
+<ion-text color="medium" *ngIf="favs.length === 0">
+  No favourites yet. Open a recipe and tap “Add to favourites”.
+</ion-text>
+</ion-content>

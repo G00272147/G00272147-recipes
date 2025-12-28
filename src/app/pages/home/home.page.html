@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>G00272147</ion-title>
+
+    <ion-buttons slot="end">
+      <!-- TEMP: text shows even if icons fail -->
+      <ion-button routerLink="/favourite" fill="clear">
+        <ion-icon slot="start" name="heart"></ion-icon>
+        Favourites
+      </ion-button>
+
+      <ion-button routerLink="/settings" fill="clear">
+        <ion-icon slot="start" name="settings"></ion-icon>
+        Settings
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Enter Ingredients</ion-label>
+    <ion-input [(ngModel)]="ingredients" placeholder="carrots,beef,potatoes"></ion-input>
+  </ion-item>
+
+<ion-button expand="block" (click)="search()">SEARCH</ion-button>
+
+<ion-spinner *ngIf="loading"></ion-spinner>
+
+<ion-card *ngFor="let r of results">
+  <img [src]="r.image" />
+  <ion-card-content>
+    <ion-card-title>{{ r.title }}</ion-card-title>
+      <ion-button size="small" (click)="goToDetails(r.id)">DETAILS</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

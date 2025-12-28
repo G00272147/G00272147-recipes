@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Settings</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home" fill="clear" aria-label="Home">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+
+      <ion-button routerLink="/favourite" fill="clear" aria-label="Favourites">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
+
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-list-header>Display Recipe Measurments In:</ion-list-header>
+
+    <ion-radio-group
+    [value]="measurement"
+    (ionChange)="changeMeasurement($event.detail.value)"
+    >
+
+    <ion-item>
+      <ion-label>Metric</ion-label>
+      <ion-radio value="metric"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>US</ion-label>
+      <ion-radio value="us"></ion-radio>
+    </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+ 
