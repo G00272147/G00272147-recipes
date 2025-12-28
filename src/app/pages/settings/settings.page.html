@@ -1,39 +1,46 @@
 <ion-header>
   <ion-toolbar>
+    <!-- Back button -->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
 
     <ion-title>Settings</ion-title>
 
+    <!-- Navigation buttons -->
     <ion-buttons slot="end">
-      <ion-button routerLink="/home" fill="clear" aria-label="Home">
+           <ion-button routerLink="/home" fill="clear" aria-label="Home">
         <ion-icon slot="icon-only" name="home"></ion-icon>
       </ion-button>
 
-      <ion-button routerLink="/favourite" fill="clear" aria-label="Favourites">
+          <ion-button routerLink="/favourite" fill="clear" aria-label="Favourites">
         <ion-icon slot="icon-only" name="heart"></ion-icon>
       </ion-button>
 
-      </ion-buttons>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content class="ion-padding">
   <ion-list>
+    <!--List header for measurement settings-->
     <ion-list-header>Display Recipe Measurments In:</ion-list-header>
 
+    <!--Radio buttons for measurement settings in settings.page.ts-->
+    <!--When user changes measurement, changeMeasurement is called and saved-->
     <ion-radio-group
     [value]="measurement"
     (ionChange)="changeMeasurement($event.detail.value)"
     >
 
+    <!--Metric option-->
     <ion-item>
       <ion-label>Metric</ion-label>
       <ion-radio value="metric"></ion-radio>
     </ion-item>
 
+    <!--US option-->
     <ion-item>
       <ion-label>US</ion-label>
       <ion-radio value="us"></ion-radio>
