@@ -23,26 +23,50 @@
 
 
 <ion-content class="ion-padding">
-  <!-- Input field for ingredients -->
-  <ion-item>
-    <ion-label position="stacked">Enter Ingredients</ion-label>
-    <ion-input [(ngModel)]="ingredients" placeholder="carrots,beef,potatoes"></ion-input>
-  </ion-item>
+  <!-- Search bar for ingredients -->
+  <ion-searchbar
+    [(ngModel)]="ingredients"
+    placeholder="Chicken, carrots, beef etc."
+    show-clear-button="focus"
+  ></ion-searchbar>
 
-  <!-- Search button, calls search method in home.page.ts -->
-<ion-button expand="block" (click)="search()">SEARCH</ion-button>
+  <ion-button expand="block" shape="round" (click)="search()">
+    Search Recipes
+  </ion-button>
+
+  <ion-button
+    expand="block"
+    fill="outline"
+    shape="round"
+    (click)="ingredients = ''; results = []; errorMsg = '';"
+  >
+    Clear
+  </ion-button>
 
 <!-- Show spinner while loading -->
 <ion-spinner *ngIf="loading"></ion-spinner>
 
+<ion-text color="danger" *ngIf="errorMsg">{{ errorMsg }}</ion-text>
+
+<ion-text
+  color="medium"
+  *ngIf="!loading && results.length === 0 && ingredients.trim() && !errorMsg"
+  >
+    No recipes found. Try different ingredients.
+</ion-text>
+
 <!-- Show results as cards with images from spoonacular -->
 <ion-card *ngFor="let r of results">
   <img [src]="r.image" />
-  <ion-card-content>
+
+  <ion-card-header>
     <!-- Recipe title -->
     <ion-card-title>{{ r.title }}</ion-card-title>
+  </ion-card-header>
+
+    <ion-card-content>
     <!-- Button to view recipe details -->
-      <ion-button size="small" (click)="goToDetails(r.id)">DETAILS</ion-button>
+      <ion-button size="small" shape="round" (click)="goToDetails(r.id)">DETAILS</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
