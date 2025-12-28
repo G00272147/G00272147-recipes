@@ -36,13 +36,20 @@
   <h2>{{ recipe.title }}</h2>
   <img *ngIf="recipe.image" [src]="recipe.image" />
 
-  <h3>Ingredients</h3>
-  <ion-card *ngFor="let ing of recipe.extendedIngredients">
-        <ion-card-content>
-      <div> {{ ing.original }}</div>
-      <ion-text color="medium">{{ measureText(ing) }}</ion-text>
-    </ion-card-content>
-  </ion-card>
+<h3>Ingredients</h3>
+
+<ion-card *ngFor="let ing of recipe.extendedIngredients">
+  <ion-img
+    *ngIf="ing.image"
+    class="ing-img--small"
+    [src]="'https://spoonacular.com/cdn/ingredients_100x100/' + ing.image"
+  ></ion-img>
+
+  <ion-card-content>
+    <div>{{ ing.original }}</div>
+    <ion-text color="medium">{{ measureText(ing) }}</ion-text>
+  </ion-card-content>
+</ion-card>
 
 <h3>Instructions</h3>
 <ion-list>
