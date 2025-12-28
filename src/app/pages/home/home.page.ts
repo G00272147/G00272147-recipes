@@ -20,13 +20,28 @@ export class HomePage {
 
   constructor(private api: SpoonacularService, private router: Router) {}
 
+  errorMsg = '';
+
   search() {
+    const query = this.ingredients.trim();
+    if (!query) {
+      this.errorMsg = 'Please enter at least one ingredient.';
+      return;
+    }
+    
+    this.errorMsg = '';
     this.loading = true;
-    this.api.searchRecipes(this.ingredients).subscribe({
+    this.results = []; // Clear previous results
+
+    this.api.searchRecipes(query).subscribe({
       next: (res) => {
       this.results = res;
       this.loading = false;
-      alert('Could not load recipes');
+         },
+      error: (err) => {
+        console.error('SEARCH ERROR:', err);
+        this.errorMsg = 'Could not load recipes';
+        this.loading = false;
       },
     });
 }
