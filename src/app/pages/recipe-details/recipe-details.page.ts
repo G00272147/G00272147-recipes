@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { SpoonacularService } from '../../services/spoonacular';
 import { StoreService } from '../../services/store.service';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-recipe-details',
   templateUrl: './recipe-details.page.html',
   styleUrls: ['./recipe-details.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule, RouterModule]
 })
 export class RecipeDetailsPage implements OnInit {
   id = 0;
