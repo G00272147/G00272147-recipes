@@ -8,10 +8,10 @@
   background: #fff;
 }
 
-//Main recipe image at top of recipe details page
+/* Main recipe image at top of recipe details page */
 .recipe-hero {
-  height: 400px;       // change to 160–240 as you like
-  width: 500px;
+  height: 200px;      
+  width: 100%;
   border-radius: 16px;
   overflow: hidden;
   margin: 12px 0;
@@ -22,18 +22,19 @@
   object-fit: cover;
 }
 
-//Modern style for section cards
+/* Modern style for section cards */
 .section-card {
   border-radius: 18px;
   overflow: hidden;
   margin: 12px 0;
-}
+  }
 
 //Title styling for recipe details page
 .recipe-title {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.35rem;
+  font-weight: 800;
   line-height: 1.2;
+  letter-spacing: -0.2px;
 }
 
 //Section headers
@@ -41,23 +42,24 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.2px;
   font-size: 1.2rem;
 }
 
-//Cleaner list look
+/* Cleaner list look */
 .clean-list ion-item {
   --padding-start: 10px;
   --inner-padding-end: 10px;
   --min-height: 64px;
 }
 
-//Ingredient text
+/* Ingredient text */
 .ing-name {
   font-weight: 600;
 }
 
-//Ingredient avatar image
+/* Ingredient avatar image */
 .ing-avatar {
   width: 44px;
   height: 44px;
@@ -66,12 +68,13 @@
   border-radius: 10px;
 }
 
-//nstruction steps
+/* Instruction steps */
 .step-line {
   display: flex;
   gap: 10px;
   align-items: flex-start;
 }
+
 .step-num {
   min-width: 26px;
   height: 26px;
@@ -82,6 +85,7 @@
   font-weight: 700;
   background: rgba(0, 0, 0, 0.06);
 }
+
 .step-text {
   line-height: 1.35;
 }
