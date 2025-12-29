@@ -1,34 +1,34 @@
-//Saves and loads app data locally using Capacitor Preferences
-//Used for: Measurement units and favourite recipes
+// Saves and loads app data locally using Capacitor Preferences
+// Used for: Measurement units, favourite recipes and recent searches
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 
 @Injectable ({ providedIn: 'root' })
 export class StoreService {
-  //Get saved measurement preference
-  //If nothing saved yet, default to 'metric' 
+  // Get saved measurement preference
+  // If nothing saved yet, default to 'metric' 
   private readonly MEASURMENT_KEY = 'measurement';
   private readonly FAVOURITES_KEY = 'favourites';
   private readonly RECENT_KEY = 'recentSearches';
 
-    //Get saved measurement preference
+    // Get saved measurement preference
     async getMeasurement(): Promise<'metric' | 'us'> {
         const  { value } = await Preferences.get({ key: this.MEASURMENT_KEY});
           return (value as 'metric' | 'us') ?? 'metric';
   }
 
-  //Save measurement preference
+  // Save measurement preference
   async setMeasurement(m: 'metric' | 'us'): Promise<void> {
     await Preferences.set({ key: this.MEASURMENT_KEY, value: m});
   }
 
-  //Get saved favourite recipes. If nothing saved yet, return empty array
+  // Get saved favourite recipes. If nothing saved yet, return empty array
   async getFavourites(): Promise<any[]> {
     const { value } = await Preferences.get({ key: this.FAVOURITES_KEY });
     return value ? JSON.parse(value) : [];
   }
   
-  //Save favourite recipes list as JSON
+  // Save favourite recipes list as JSON
   async setFavourites(favs: any[]): Promise<void> {
     await Preferences.set({ 
       key: this.FAVOURITES_KEY, 

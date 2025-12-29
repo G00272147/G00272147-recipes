@@ -11,23 +11,23 @@ import { RouterModule } from '@angular/router';
   selector: 'app-settings',
   templateUrl: './settings.page.html',
 
-  //routerModule is required so routerLine buttons work in HTML
+  // RouterModule is required so routerLine buttons work in HTML
   imports: [CommonModule, IonicModule, RouterModule],
 })
 
 export class SettingsPage {
-  //Stores selected measurement system (default is metric)
+  // Stores selected measurement system (default is metric)
   measurement: 'metric' | 'us' = 'metric';
 
-  //Inject StoreService to load/save measurement preference
+  // Inject StoreService to load/save measurement preference
 constructor(private store: StoreService) { }
 
-//Loads previously saved measurement preference when entering the page (metric if none saved)
+// Loads previously saved measurement preference when entering the page (metric if none saved)
 async ionViewWillEnter() {
   this.measurement = await this.store.getMeasurement();
 }
 
-//Called when user changes measurement preference; saves new preference
+// Called when user changes measurement preference; saves new preference
 async changeMeasurement(value: 'metric' | "us") {
   this.measurement = value;
   await this.store.setMeasurement(value);

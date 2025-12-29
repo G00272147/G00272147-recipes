@@ -1,4 +1,4 @@
-//recipe details page, shows ingredients and instructions for a selected recipe
+// Recipe details page, shows ingredients and instructions for a selected recipe
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -16,35 +16,35 @@ import { RouterModule } from '@angular/router';
   imports: [IonicModule, CommonModule, RouterModule] //Use RouterModule for routerLink buttons to work on this page
 })
 
-//Allows users to add or remove recipes from their favourites list
+// Allows users to add or remove recipes from their favourites list
 export class RecipeDetailsPage implements OnInit {
-  //Recipe ID from route 
+  // Recipe ID from route 
   id = 0;
 
-  //Recipe details object returned from Spoonacular
+  // Recipe details object returned from Spoonacular
   recipe: any = null;
  
-  //User measurement preference
+  // User measurement preference
   measurement: 'metric' | 'us' = 'metric';
   isFav = false;
 
-  //Loading and error states
+  // Loading and error states
   loading = true;
   errorMsg = '';
 
   constructor(
-    //Read ID parameter from URL
+    // Read ID parameter from URL
     private route: ActivatedRoute,
 
-    //Spoonacular API service
+    // Spoonacular API service
     private api: SpoonacularService,
 
-    //Local storage service
+    // Local storage service
     private store: StoreService,
   ) { }
 
   async ngOnInit() {
-    //Get recipe ID from URL
+    // Get recipe ID from URL
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     console.log('DETAILS ID:', this.id);
 
@@ -57,13 +57,13 @@ export class RecipeDetailsPage implements OnInit {
     this.measurement = await this.store.getMeasurement();
     const favs = await this.store.getFavourites();
 
-    //Check if recipe is in favourites
+    // Check if recipe is in favourites
     this.isFav = favs.some((r: any) => r.id === this.id);
     } catch (e) {
       console.error('Store error:', e);
     }
 
-    //Load recipe details from Spoonacular API
+    // Load recipe details from Spoonacular API
     this.api.getRecipeDetails(this.id).subscribe({
       next: (r) => {
         console.log('DETAILS RESPONSE:', r);
@@ -77,7 +77,8 @@ export class RecipeDetailsPage implements OnInit {
        },
       });
     }
-  //Format ingredient amount for display
+
+  // Format ingredient amount for display
   private formatAmount(n: number): string {
   if (!isFinite(n)) return '';
 
@@ -87,7 +88,7 @@ export class RecipeDetailsPage implements OnInit {
   return Number.isInteger(rounded) ? String(rounded) : String(rounded);
 }  
 
-//Format ingredient measurement based on user preference
+// Format ingredient measurement based on user preference, Metric or US
  measureText(ing: any): string {
   const m = this.measurement === 'us' ? ing.measures.us : ing.measures.metric;
   
@@ -96,26 +97,27 @@ export class RecipeDetailsPage implements OnInit {
     return `${amountStr}${unit ? ' ' + unit : ''}`;
 }
 
-//Returns insttruction steps or empty array if none
+// Returns insttruction steps or empty array if none
 steps(): any[] {
   return this.recipe?.analyzedInstructions?.[0]?.steps ?? [];
 }
 
-//Add or remove recipe from favourites list
+// Add or remove recipe from favourites list
 async toggleFavourite() {
-  //Do nothing if recipe not loaded
+  // Do nothing if recipe not loaded
   if (!this.recipe) return;
 
   const favs = await this.store.getFavourites();
   const id = this.recipe.id;
 
   if (this.isFav) {
-    //Remove from favourites
+    // Remove from favourites
     const updated = favs.filter((r: any) => r.id !== id);
     await this.store.setFavourites(updated);
     this.isFav = false;
   } else {
-    //Add to favourites
+
+    // Add to favourites
     favs.unshift({
       id: this.recipe.id,
       title: this.recipe.title,
@@ -126,3 +128,4 @@ async toggleFavourite() {
    }
   }
 }
+

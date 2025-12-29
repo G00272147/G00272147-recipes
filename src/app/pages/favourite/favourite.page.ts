@@ -1,4 +1,4 @@
-//Load and display saved favourite recipes rom the local storage using StoreService
+// Load and display saved favourite recipes rom the local storage using StoreService
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular'
 import { CommonModule } from '@angular/common';
@@ -13,10 +13,10 @@ import { StoreService } from '../../services/store.service';
 })
 
 export class FavouritePage {
-  //Array to hold favourite recipes from local storage
+  // Array to hold favourite recipes from local storage
   favs: any[] = [];
 
-  //Inject StoreService to read favourites from preferences
+  // Inject StoreService to read favourites from preferences
   constructor(private store: StoreService) { }
 
   //Reloads favourites list so it updates after add/remove
