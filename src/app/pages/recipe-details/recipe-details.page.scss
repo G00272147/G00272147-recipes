@@ -21,3 +21,49 @@
 .recipe-hero::part(image) {
   object-fit: cover;
 }
+
+//Modern style for section cards
+.section-card {
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+//Title styling for recipe details page
+.recipe-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+//Section headers
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+//Cleaner list look
+.clean-list ion-item {
+  --padding-start: 10px;
+  --inner-padding-end: 10px;
+  --min-height: 64px;
+}
+
+//Ingredient text
+.ing-name {
+  font-weight: 600;
+}
+
+//Ingredient avatar image
+.ing-avatar {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 10px;
+}
+
+
