@@ -42,7 +42,7 @@
 <ng-container *ngIf="recipe">
   <!-- Recipe title and image -->
   <h2>{{ recipe.title }}</h2>
-  <img *ngIf="recipe.image" [src]="recipe.image" />
+ <ion-img *ngIf="recipe.image" [src]="recipe.image" class="recipe-hero"></ion-img>
 
 <h3>Ingredients</h3>
 

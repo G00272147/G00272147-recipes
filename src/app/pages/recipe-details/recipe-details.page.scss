@@ -6,3 +6,15 @@
   margin: 10px auto 0;
   background: #fff;
 }
+.recipe-hero {
+  height: 400px;       // change to 160–240 as you like
+  width: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+/* Make the internal <img> crop nicely */
+.recipe-hero::part(image) {
+  object-fit: cover;
+}
