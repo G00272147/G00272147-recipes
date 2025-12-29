@@ -77,13 +77,23 @@ export class RecipeDetailsPage implements OnInit {
        },
       });
     }
-        
+  //Format ingredient amount for display
+  private formatAmount(n: number): string {
+  if (!isFinite(n)) return '';
+
+  const rounded = n >= 10 ? Math.round(n) : Math.round(n * 10) / 10;
+
+  // Remove trailing .0 (e.g. 2.0 -> "2")
+  return Number.isInteger(rounded) ? String(rounded) : String(rounded);
+}  
+
 //Format ingredient measurement based on user preference
  measureText(ing: any): string {
   const m = this.measurement === 'us' ? ing.measures.us : ing.measures.metric;
-  const amount = Math.round(Number(m.amount) * 1000) / 1000;
+  
+  const amountStr = this.formatAmount(Number(m.amount));
   const unit = (m.unitLong ?? '').trim();
-  return `${amount}${unit ? ' ' + unit : ""}`;
+    return `${amountStr}${unit ? ' ' + unit : ''}`;
 }
 
 //Returns insttruction steps or empty array if none
