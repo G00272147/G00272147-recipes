@@ -66,4 +66,27 @@
   border-radius: 10px;
 }
 
+//nstruction steps
+.step-line {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.step-num {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.06);
+}
+.step-text {
+  line-height: 1.35;
+}
 
+//Favourite button spacing
+.fav-btn {
+  margin-top: 14px;
+}
