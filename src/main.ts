@@ -8,9 +8,10 @@ import { AppComponent } from './app/app.component';
 //Ionicons setup, registering icons used in the app
 import { addIcons } from 'ionicons';
 import { heart, settings, home } from 'ionicons/icons';
+import { heartOutline } from 'ionicons/icons';
 
 //Register icons
-addIcons({ heart, settings, home });
+addIcons({ heart, settings, home, heartOutline });
 
 bootstrapApplication(AppComponent, {
   providers: [

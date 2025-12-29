@@ -1,23 +1,19 @@
+<!-- Header with navigation -->
 <ion-header>
   <ion-toolbar>
-    <!-- Back button -->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
 
-    <!-- Page title -->
-    <ion-title>Recipe Details</ion-title>
+    <ion-title>Recipe</ion-title>
 
-    <!-- Navigation buttons -->
     <ion-buttons slot="end">
       <ion-button routerLink="/home" fill="clear" aria-label="Home">
         <ion-icon slot="icon-only" name="home"></ion-icon>
       </ion-button>
-
       <ion-button routerLink="/favourite" fill="clear" aria-label="Favourites">
         <ion-icon slot="icon-only" name="heart"></ion-icon>
       </ion-button>
-
       <ion-button routerLink="/settings" fill="clear" aria-label="Settings">
         <ion-icon slot="icon-only" name="settings"></ion-icon>
       </ion-button>
@@ -25,57 +21,85 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content class="ion-padding" >
-  <!--Shows recipe ID from the route-->
-  <p><b>Recipe ID:</b> {{ id }}</p>
-
-  <!-- Loading spinner -->
+<ion-content class="ion-padding">
+  <!-- Loading + error states -->
   <ion-spinner *ngIf="loading"></ion-spinner>
 
-  <!-- Error message shown if API fails -->
   <ion-text color="danger" *ngIf="errorMsg">
     {{ errorMsg }}
   </ion-text>
 
-  <!-- Recipe details shown when loaded -->
-<ng-container *ngIf="recipe">
-  <!-- Recipe title and image -->
-  <h2>{{ recipe.title }}</h2>
- <ion-img *ngIf="recipe.image" [src]="recipe.image" class="recipe-hero"></ion-img>
+  <!-- Main content -->
+  <ng-container *ngIf="recipe">
+    <!-- HERO SECTION -->
+    <ion-card class="section-card">
+      <ion-img *ngIf="recipe.image" [src]="recipe.image" class="recipe-hero"></ion-img>
 
-<h3>Ingredients</h3>
+      <ion-card-header>
+        <ion-card-title class="recipe-title">{{ recipe.title }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
 
-<!--Loop through ingredients returned by Spoonacular-->
-<ion-card *ngFor="let ing of recipe.extendedIngredients">
-  <!--Ingredient image -->
-  <ion-img
-    *ngIf="ing.image"
-    class="ing-img--small"
-    [src]="'https://spoonacular.com/cdn/ingredients_100x100/' + ing.image"
-  ></ion-img>
+    <!-- INGREDIENTS SECTION -->
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title class="section-title">
+          <ion-icon name="nutrition-outline"></ion-icon>
+          Ingredients
+        </ion-card-title>
+      </ion-card-header>
 
-  <ion-card-content>
-    <!--Ingredient name-->
-    <div>{{ ing.originalClean || ing.name }}</div>
-    <!--Ingredient measurement-->
-    <ion-text color="medium">{{ measureText(ing) }}</ion-text>
-  </ion-card-content>
-</ion-card>
+      <ion-card-content>
+        <ion-list lines="full" class="clean-list">
+          <ion-item *ngFor="let ing of recipe.extendedIngredients">
+            <ion-avatar slot="start" *ngIf="ing.image">
+              <img
+                [src]="'https://spoonacular.com/cdn/ingredients_100x100/' + ing.image"
+                class="ing-avatar"
+                alt=""
+              />
+            </ion-avatar>
 
-<h3>Instructions</h3>
-<!--Loop through instruction steps returned by Spoonacular-->
-<ion-list>
-  <ion-item *ngFor="let s of steps()">
-    <ion-label>
-        <b> {{ s.number }}:</b> {{ s.step }}
-    </ion-label>
-  </ion-item>
-</ion-list>
+            <ion-label>
+              <div class="ing-name">{{ ing.nameClean || ing.name }}</div>
+              <div class="ing-measure">{{ measureText(ing) }}</div>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-<!-- Button to add or remove recipe from favourites -->
-<ion-button expand="block" (click)="toggleFavourite()">
-  {{ isFav ? 'REMOVE FROM FAVOURITES' : 'ADD TO FAVOURITES' }}
+    <!-- INSTRUCTIONS SECTION -->
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title class="section-title">
+          <ion-icon name="list-outline"></ion-icon>
+          Instructions
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list lines="none" class="clean-list">
+          <ion-item *ngFor="let s of steps()">
+            <ion-label>
+              <div class="step-line">
+                <span class="step-num">{{ s.number }}</span>
+                <span class="step-text">{{ s.step }}</span>
+              </div>
+            </ion-label>
+          </ion-item>
+
+          <ion-text color="medium" *ngIf="steps().length === 0">
+            No instructions provided for this recipe.
+          </ion-text>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- FAVOURITE BUTTON -->
+    <ion-button expand="block" shape="round" class="fav-btn" (click)="toggleFavourite()">
+      <ion-icon slot="start" [name]="isFav ? 'heart' : 'heart-outline'"></ion-icon>
+      {{ isFav ? 'Remove from favourites' : 'Add to favourites' }}
     </ion-button>
   </ng-container>
 </ion-content>
