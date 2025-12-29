@@ -25,13 +25,32 @@
 <ion-content class="ion-padding">
   <h2 class="page-title">Search by Ingredients</h2>
 <p class="page-subtitle">Enter one or more ingredients in the search box separated by commas:</p>
-  <!-- Search bar for ingredients -->
+  
+<!-- Search bar for ingredients -->
   <ion-searchbar
     [(ngModel)]="ingredients"
     placeholder="e.g. Chicken, rice, broccoli"
     show-clear-button="focus"
   ></ion-searchbar>
 
+<!--Recent Searches -->
+<ng-container *ngIf="recentSearches.length > 0">
+  <div class="recent-title">Recent Searches:</div>
+
+     <div class="recent-chips">
+      <!-- Click a chip to re-run that search -->
+      <ion-chip *ngFor="let s of recentSearches" (click)="useRecentSearch(s)">
+        <ion-label>{{ s }}</ion-label>
+      </ion-chip>
+
+   <!-- Optional: clear recent searches -->
+      <ion-button fill="clear" size="small" (click)="clearRecentSearches()">
+        Clear
+      </ion-button>
+    </div>
+  </ng-container>
+
+  <!-- Search and Clear buttons -->
   <ion-button expand="block" shape="round" (click)="search()">
     Search Recipes
   </ion-button>
@@ -48,8 +67,10 @@
 <!-- Show spinner while loading -->
 <ion-spinner *ngIf="loading"></ion-spinner>
 
+<!--Error Message-->
 <ion-text color="danger" *ngIf="errorMsg">{{ errorMsg }}</ion-text>
 
+<!-- No results message -->
 <ion-text
   color="medium"
   *ngIf="!loading && results.length === 0 && ingredients.trim() && !errorMsg"
